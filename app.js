@@ -3,7 +3,7 @@ import session from 'express-session';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
-import flash from 'connect-flash';
+import flash from 'express-flash';
 import globalRouter from './routers/globalRouter';
 import passport from 'passport';
 import path from 'path';
