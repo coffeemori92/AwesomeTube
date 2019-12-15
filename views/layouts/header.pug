@@ -1,0 +1,22 @@
+header.header
+  .header__wrapper
+    .header__column
+      a(href=routes.home)
+        i.fab.fa-youtube
+    .header__column
+      form(action=routes.search, metod='GET')
+        input(type='text', placeholder='検索', name='term')
+    .header__column
+      ul
+        if !loggedUser
+          li
+            a(href=routes.join) 新規登録
+          li
+            a(href=routes.login) ログイン
+        else
+          li
+            a(href=routes.upload) 動画を上げる
+          li
+            a(href=routes.me) プロフィール
+          li
+            a(href=routes.logout) ログアウト
