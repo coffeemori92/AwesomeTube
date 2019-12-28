@@ -12,6 +12,7 @@ import mongoose from 'mongoose';
 import MongoStore from 'connect-mongo';
 import routes from './routes';
 import { localsMiddleware } from './middlewares';
+import './passport';
 
 dotenv.config();
 

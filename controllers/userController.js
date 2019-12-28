@@ -8,7 +8,7 @@ export const getJoin = (req, res) => {
     });
 };
 
-export const postJoin = async (req, res) => {
+export const postJoin = async (req, res, next) => {
     console.log(req.body);
     const {
         body: {
@@ -37,7 +37,6 @@ export const postJoin = async (req, res) => {
                 res.redirect(routes.home);
             }
         }
-
     }catch(error){
         console.error(error);
         res.redirect(routes.home);
