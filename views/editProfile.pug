@@ -1,0 +1,11 @@
+extends layouts/main
+
+block content
+  .form-container
+    form(action=`${routes.user}${routes.editProfile}`, method='POST', enctype='multipart/form-data')
+      .fileUpload
+        label(for='avatar') イメージ
+        input(type='file', id='avatar', name='avatar', accept='imaga/*')
+      input(type='text', placeholder='名前', name='name', value=loggedUser.name)
+      input(type='email', placeholder='メール', name='email', value=loggedUser.email)
+      input(type='submit', value='変更')

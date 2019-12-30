@@ -40,7 +40,13 @@ const routes = {
     me: ME,
     video: VIDEO,
     upload:UPLOAD,
-    videoDetail: VIDEO_DETAIL,
+    videoDetail: (id) => {
+        if(id){
+            return `/video/${id}`;
+        }else{
+            return VIDEO_DETAIL;
+        }
+    },
     editVideo: EDIT_VIDEO,
     deleteVideo: DELETE_VIDEO,
     github: GITHUB,

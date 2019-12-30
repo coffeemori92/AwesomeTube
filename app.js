@@ -13,6 +13,8 @@ import MongoStore from 'connect-mongo';
 import routes from './routes';
 import { localsMiddleware } from './middlewares';
 import './passport';
+import userRouter from './routers/userRouter';
+import videoRouter from './routers/videoRouter';
 
 dotenv.config();
 
@@ -49,5 +51,7 @@ app.use(passport.session());    // req.session 객체에 passport 정보를 저�
 app.use(localsMiddleware);
 
 app.use(routes.home, globalRouter);
+app.use(routes.user, userRouter);
+app.use(routes.video, videoRouter);
 
 export default app;
