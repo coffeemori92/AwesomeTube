@@ -15,6 +15,7 @@ import { localsMiddleware } from './middlewares';
 import './passport';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
+import apiRouter from './routers/apiRouter';
 
 dotenv.config();
 
@@ -27,7 +28,7 @@ app.set('view engine', 'pug');
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json()); // req.body
 app.use(express.urlencoded({extended: true})); // false: querystring모듈(내장 모듈)
                                                // true: qs모듈(npm 패키지)
@@ -53,5 +54,6 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.user, userRouter);
 app.use(routes.video, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app;

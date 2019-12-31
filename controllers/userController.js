@@ -49,19 +49,67 @@ export const getLogin = (req, res) => {
     });
 };
 
-export const postLogin = passport.authenticate('local', {
-    failureRedirect: routes.login,
-    successRedirect: routes.home
-});
-
 export const logout = (req, res) => {
     req.logout(); // req.user 객체 제거
     req.session.destroy(); // req.session 객체의 내용 제거
     res.redirect(routes.home);
 };
 
-export const getMe = (req, res) => {
-    res.render('userDetail', {pageTitle: 'プロフィール', user: req.user});
+export const postLogin = passport.authenticate('local', {
+    failureRedirect: routes.login,
+    successRedirect: routes.home
+});
+
+export const lineLogin = passport.authenticate('line');
+
+export const lineLoginCallback = async (_, __, profile, cb) => {
+    console.log(profile);
+};
+
+export const postLineLogin = (req, res) => {
+    res.redirect(routes.home);
+};
+
+export const githubLogin = passport.authenticate('github');
+
+export const postGithubLogin = (req, res) => {
+    res.redirect(routes.home);
+};
+
+export const githubLoginCallback = async (_, __, profile, cb) => {
+    const {
+        _json: {
+            id, avatar_url: avatarUrl, name, email
+        }
+    } = profile;
+    console.log(profile);
+    try {
+        const user = await User.findOne({ email });
+        if(user){
+            user.githubId = id;
+            user.save();
+            return cb(null, user);
+        }
+        const newUser = await User.create({
+            email,
+            name,
+            githubId: id,
+            avatarUrl
+        });
+        return cb(null, newUser);
+    }catch(error){
+        return cb(error);
+    }
+};
+
+export const getMe = async (req, res) => {
+    try{
+        const user = await User.findById(req.user.id).populate('videos');
+        res.render('userDetail', {pageTitle: 'プロフィール', user });
+    }catch(error){
+        res.redirect(routes.home);
+    }
+    
 };
 
 export const userDetail = async (req, res) => {
@@ -84,6 +132,8 @@ export const postEditProfile = async (req, res) => {
         body: { name, email },
         file
     } = req;
+    console.log(req.body);
+    console.log(req.file);
     try{
         await User.findByIdAndUpdate(req.user.id, {
             name, email, avatarUrl: file ? file.path : req.user.avatarUrl

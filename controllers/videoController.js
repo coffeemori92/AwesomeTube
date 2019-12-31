@@ -20,10 +20,11 @@ export const home = async (req, res) => {
 
 export const search = async (req, res) => {
     console.log(req.query);
-    const {query: {term: searchingBy}} = req;
+    const { query: { term: searchingBy } } = req;
     let videos = [];
     try{
-        videos = await Video.find({title: {
+        videos = await Video.find({
+            title: {
             $regex: searchingBy, 
             $options: 'i'
         }});
@@ -72,6 +73,39 @@ export const videoDetail = async (req, res) => {
     try {
         const video = await Video.findById(id).populate('creator').populate('comments');
         res.render('videoDetail', { pageTitle: video.title, video });
+    }catch(error){
+        console.error(error);
+        res.redirect(routes.home);
+    }
+};
+
+export const getEditVideo = async (req, res) => {
+    const {
+        params: { id }
+    } = req;
+    try{
+        const video = await Video.findById(id);
+        if(String(video.creator) !== req.user.id){
+            throw Error();
+        }else{
+            res.render('editVideo', {
+                pageTitle: '動画の編集', video
+            });
+        }
+    }catch(error){
+        console.error(error);
+        res.redirect(routes.home);
+    }
+};
+
+export const postEditVideo = async (req, res) => {
+    const {
+        params: { id },
+        body: { title, description }
+    } = req;
+    try{
+        await Video.findOneAndUpdate({ _id: id }, { title, description });
+        res.redirect(routes.videoDetail(id));
     }catch(error){
         console.error(error);
         res.redirect(routes.home);

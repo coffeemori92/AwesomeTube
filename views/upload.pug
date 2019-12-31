@@ -1,0 +1,14 @@
+extends layouts/main
+
+block content
+  .form-container
+    .record-container#jsRecordContainer
+      video#jsVideoPreview
+      button#jsRecordBtn 動画を撮る
+    form(action=`${routes.video}${routes.upload}`, method='POST', enctype='multipart/form-data')
+      .fileUpload
+        label(for='file') 動画を上げる
+        input(type='file', id='file', name='videoFile', required, accept='video/*')
+      input(type='text', placeholder='タイトル', name='title', required)
+      textarea(name='description', placeholder='内容', required)
+      input(type='submit', value='アップロード')
