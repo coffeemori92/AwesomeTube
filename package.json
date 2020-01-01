@@ -4,7 +4,7 @@
   "description": "Expressで作るYoutube模倣サイト",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss'",
+    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore './public/'",
     "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
     "build:assets": "cross-env WEBPACK_ENV=production webpack"
   },
@@ -36,6 +36,7 @@
     "node-sass": "^4.13.0",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
+    "passport-kakao": "^1.0.0",
     "passport-line": "0.0.4",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",

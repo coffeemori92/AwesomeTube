@@ -1,6 +1,5 @@
 import routes from '../routes';
 import Video from '../models/Video';
-import Comment from '../models/Comment';
 
 export const home = async (req, res) => {
     try{
@@ -109,5 +108,23 @@ export const postEditVideo = async (req, res) => {
     }catch(error){
         console.error(error);
         res.redirect(routes.home);
+    }
+};
+
+export const postRegisterView = async (req, res) => {
+    const {
+        params: { id }
+    } = req;
+    try {
+        const video = await Video.findById(id);
+        console.log(video);
+        video.views += 1;
+        video.save();
+        res.status(200);
+    }catch(error){
+        console.error(error);
+        res.status(400);
+    }finally{
+        res.end();
     }
 };

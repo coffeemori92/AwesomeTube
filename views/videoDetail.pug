@@ -12,13 +12,14 @@ block content
           button 動画を編集する
       h5.video__title=video.title
       p.video__description=video.description
-        span.video__views #{video.views} 回視聴
+        span.video__views#jsVideoViewsNumber #{video.views}
+          span  回視聴
       .video__author
         |作成者 
         a(href=routes.userDetail(video.creator.id))=video.creator.name
     .video__comments
-      span.video__comment-number
-        span#jsCommentNumber コメント #{video.comments.length}
+      span.video__comment-number コメント 
+        span#jsCommentNumber #{video.comments.length}
       form.add__comment#jsAddComment
         input(type='text', placeholder='公開コメントを入力...')
       ul.video__comments-list#jsCommentList

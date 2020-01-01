@@ -7,6 +7,8 @@ export const postAddComment = async (req, res) => {
         body: { comment },
         user
     } = req;
+    console.log(req.params);
+    console.log(req.body);
     try{
         const video = await Video.findById(id);
         const newComment = await Comment.create({
