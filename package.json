@@ -9,9 +9,9 @@
     "build:server": "babel src --out-dir build",
     "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    "prebuild": "rimraf build",
+    "prebuild": "rm -rf build",
     "copyAll": "cp -R src/public build && cp -R src/views build",
-    "start" : "node build/init.js",
+    "start": "node build/init.js",
     "prestart": "npm run build"
   },
   "author": "coffeemori",
