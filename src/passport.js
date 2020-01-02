@@ -1,6 +1,6 @@
 import passport from 'passport';
 import GithubStrategy from 'passport-github';
-import LineStrategy from 'passport-line';
+import LineStrategy from 'passport-line-auth';
 import User from './models/User';
 import routes from './routes';
 import { githubLoginCallback, lineLoginCallback } from './controllers/userController';
@@ -10,14 +10,19 @@ passport.use(User.createStrategy());
 passport.use(new LineStrategy({
     channelID: process.env.LINE_ID,
     channelSecret: process.env.LINE_SECRET,
-    callbackURL: `http://localhost:4000${routes.lineCallback}`
+    callbackURL: process.env.PRODUCTION
+        ? `https://whispering-tor-64595.herokuapp.com${routes.lineCallback}`
+        : `http://localhost:4000${routes.lineCallback}`,
+    scope: ['profile', 'openid', 'email']
 }, lineLoginCallback
 ));
 
 passport.use(new GithubStrategy({
     clientID: process.env.GH_ID,
     clientSecret: process.env.GH_SECRET,
-    callbackURL: `http://localhost:4000${routes.githubCallback}`
+    callbackURL: process.env.PRODUCTION
+        ? `https://whispering-tor-64595.herokuapp.com${routes.githubCallback}`
+        : `http://localhost:4000${routes.githubCallback}`
 }, githubLoginCallback
 ));
 
