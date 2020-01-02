@@ -4,9 +4,15 @@
   "description": "Expressで作るYoutube模倣サイト",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore './public/'",
-    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
-    "build:assets": "cross-env WEBPACK_ENV=production webpack"
+    "dev:server": "nodemon --exec babel-node ./src/init.js --delay 2 --ignore '.scss' --ignore './public/'",
+    "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
+    "build:server": "babel src --out-dir build",
+    "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rimraf build",
+    "copyAll": "cp -R src/public build && cp -R src/views build",
+    "start" : "node build/init.js",
+    "prestart": "npm run build"
   },
   "author": "coffeemori",
   "license": "ISC",
@@ -17,6 +23,7 @@
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.6",
     "autoprefixer": "^9.7.3",
+    "aws-sdk": "^2.596.0",
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
     "connect-flash": "^0.1.1",
@@ -33,6 +40,7 @@
     "mongoose": "^5.8.1",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "node-sass": "^4.13.0",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
@@ -47,6 +55,7 @@
     "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "rimraf": "^3.0.0"
   }
 }

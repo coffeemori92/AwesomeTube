@@ -1,6 +1,6 @@
 mixin videoBlock(video = {})
   .videoBlock
     a(href=routes.videoDetail(video.id))
-      video.videoBlock__thumnail(src=`/${video.videoFile}`, controls=true)
+      video.videoBlock__thumnail(src=`/${video.videoFile}` /*AWS S3 사용시 src=video.src*/, controls=true)
       h4.videoBlock__title=video.title
       h6.videoBlock__views #{video.views} 回視聴

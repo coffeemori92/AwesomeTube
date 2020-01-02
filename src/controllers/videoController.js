@@ -49,11 +49,11 @@ export const postUpload = async (req, res) => {
             title, description
         },
         file: {
-            path
+            path // AWS S3사용시 location
         }
     } = req;
     const newVideo = await Video.create({
-        fileUrl: path,
+        fileUrl: path, // AWS S3사용시 location
         title,
         description,
         creator: req.user.id

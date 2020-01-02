@@ -16,14 +16,12 @@ export const postJoin = async (req, res, next) => {
         }
     } = req;
     if(password !== password2){
-        req.flash('passwordError', 'パスワードが一致しません');
         res.status(400);
         res.render('join', {pageTitle: '新規登録'});
     }
     try{
         const exUser = await User.findOne({email: email});
         if(exUser){
-            req.flash('emailError', '既に登録されているメールです');
             res.render('join', {pageTitle: '新規登録'});
         }else{
             try{
@@ -136,6 +134,7 @@ export const postEditProfile = async (req, res) => {
     console.log(req.file);
     try{
         await User.findByIdAndUpdate(req.user.id, {
+            // AWS S3사용시 file.location
             name, email, avatarUrl: file ? file.path : req.user.avatarUrl
         });
         res.redirect(routes.me);

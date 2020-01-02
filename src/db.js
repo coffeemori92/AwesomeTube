@@ -7,7 +7,9 @@ mongoose.connect(
     {
         dbName: 'awesome-tube',
         useNewUrlParser: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+        useUnifiedTopology: true,
+        useCreateIndex: true
     }
 );
 
