@@ -60,7 +60,8 @@ export const postLogin = passport.authenticate('local', {
 
 export const lineLogin = passport.authenticate('line');
 
-export const lineLoginCallback = async (_, __, profile, cb) => {
+export const lineLoginCallback = async (accessToken, refreshToken, params, profile, cb) => {
+    console.log(params);
     console.log(profile);
 };
 

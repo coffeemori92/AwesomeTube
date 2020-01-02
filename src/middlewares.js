@@ -29,8 +29,8 @@ import multer from 'multer';
 //     })
 // });
 
-const multerVideo  = multer({dest: 'uploads/videos/'});
-const multerAvatar = multer({dest: 'uploads/avatars/'});
+const multerVideo  = multer({dest: 'src/uploads/videos/'});
+const multerAvatar = multer({dest: 'src/uploads/avatars/'});
 
 // single 하나의 이미지를 업로드 할 때 사용 => req.file 객체 생성
 // array 여러개의 이미지를 업로드 할 때 사용, 속성 하나에 이미지를 여러개 업로드
