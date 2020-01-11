@@ -4,7 +4,7 @@ block content
   .form-container
     .record-container#jsRecordContainer
       video#jsVideoPreview
-      button#jsRecordBtn(style='background-color: orangered') 動画を撮る
+      button#jsRecordBtn 動画を撮る
     form(action=`${routes.video}${routes.upload}`, method='POST', enctype='multipart/form-data')
       .fileUpload
         label(for='file') 動画を上げる

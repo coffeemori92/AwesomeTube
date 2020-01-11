@@ -1,6 +1,7 @@
 import routes from '../routes';
 import User from '../models/User';
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
 
 export const getJoin = (req, res) => {
     res.render('join', {
@@ -60,9 +61,28 @@ export const postLogin = passport.authenticate('local', {
 
 export const lineLogin = passport.authenticate('line');
 
-export const lineLoginCallback = async (accessToken, refreshToken, params, profile, cb) => {
-    console.log(params);
+export const lineLoginCallback = async (_, __, params, ___, cb) => {
+    const { id_token } = params;
+    const profile = jwt.decode(id_token);
+    const { sub: id, name, picture: avatarUrl, email } = profile;
     console.log(profile);
+    try{
+        const user = await User.findOne({ email });
+        if(user){
+            user.lineId = id;
+            user.save();
+            return cb(null, user);
+        }
+        const newUser = await User.create({
+            email,
+            name,
+            lineId: id,
+            avatarUrl
+        });
+        return cb(null, newUser);
+    }catch(error){
+        return cb(error);
+    }
 };
 
 export const postLineLogin = (req, res) => {

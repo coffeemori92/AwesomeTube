@@ -1,10 +1,19 @@
 .record-container {
     width: 100%;
-    max-width: 320px;
+    max-width: 520px;
     margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     video{
         background-color: $black;
         width: 100%;
         margin-bottom: 15px;
+    }
+    button{
+        background-color: orangered;
+    }
+    button.recording{
+        background-color: coral;
     }
 }

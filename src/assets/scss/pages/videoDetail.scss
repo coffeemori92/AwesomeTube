@@ -2,6 +2,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    .videoPlayer{
+        width: 100%;
+        video{
+            width: inherit;
+        }
+    }
     .video__info{
         width: 100%;
         max-width: 850px;
@@ -27,6 +35,7 @@
         }
         .video__views{
             font-size: 14px;
+            margin-top: 10px;
         }
         .video__description{
             font-size: 15px;
