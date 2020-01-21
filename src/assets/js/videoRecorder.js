@@ -16,6 +16,8 @@ const makeLink = () => {
     link.href = url
     link.id = 'download';
     link.download = '収録済み.webm';
+    link.classList.add('download');
+    btn.classList.add('download');
     btn.textContent = 'ダウンロード';
     link.appendChild(btn);
     recorderContainer.appendChild(link);

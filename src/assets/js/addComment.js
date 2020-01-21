@@ -1,11 +1,20 @@
 import axios from 'axios';
 
 const addCommentForm = document.getElementById('jsAddComment');
+const loadComment = document.getElementById('jsLoadComment');
 const commentList = document.getElementById('jsCommentList');
 const commentNumber = document.getElementById('jsCommentNumber');
 
+const conuntComment = () => {
+    const cntComment = parseInt(commentList.childElementCount, 10);
+    if(cntComment > loadComment.dataset.value){
+        commentList.lastChild.remove();
+    }
+};
+
 const increaseNumber = () => {
     commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+    conuntComment();
 };
 
 const addComment = comment => {

@@ -1,5 +1,6 @@
 import routes from '../routes';
 import Video from '../models/Video';
+import Comment from '../models/Comment';
 
 export const home = async (req, res) => {
     try{
@@ -71,7 +72,8 @@ export const videoDetail = async (req, res) => {
     } = req;
     try {
         const video = await Video.findById(id).populate('creator').populate('comments');
-        res.render('videoDetail', { pageTitle: video.title, video });
+        const comments = await Comment.find({ video: video.id }).sort({'createdAt': -1}).limit(10).populate('creator');
+        res.render('videoDetail', { pageTitle: video.title, video, comments });
     }catch(error){
         console.error(error);
         res.redirect(routes.home);

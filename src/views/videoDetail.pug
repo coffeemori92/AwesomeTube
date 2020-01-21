@@ -20,9 +20,13 @@ block content
     .video__comments
       span.video__comment-number コメント 
         span#jsCommentNumber #{video.comments.length}
-      form.add__comment#jsAddComment
-        input(type='text', placeholder='公開コメントを入力...')
+      if loggedUser
+        form.add__comment#jsAddComment
+          input(type='text', placeholder='公開コメントを入力...')
       ul.video__comments-list#jsCommentList
-        each comment in video.comments.reverse()
+        each comment in comments
           li
             span=comment.text
+      a#jsLoadComment(data-value='10')
+        button コメントをもっと見る
+      

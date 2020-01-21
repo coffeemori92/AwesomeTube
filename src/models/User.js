@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
         unique: true
     },
     avatarUrl: String,
-    githubId: String,
+    facebookId: String,
     lineId: String,
     createdAt: {
         type: Date,

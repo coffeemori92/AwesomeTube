@@ -59,6 +59,35 @@ export const postLogin = passport.authenticate('local', {
     successRedirect: routes.home
 });
 
+export const facebookLogin = passport.authenticate('facebook');
+
+export const facebookLoginCallback = async (_, __, profile, cb) => {
+    console.log(profile);
+    const {_json: { id, name, email }} = profile;
+    try{
+        const user = await User.findOne({ email });
+        if(user){
+            user.facebookId = id;
+            user.save();
+            return cb(null, user);
+        }
+        const newUser = await User.create({
+            email,
+            name,
+            facebookId: id,
+            avatarUrl: `https://graph.facebook.com/${id}/picture?type=large`
+        });
+        return cb(null, newUser);
+    }catch(error){
+        console.error(error);
+        return cb(error);
+    }
+};
+
+export const postFacebookLogin = (req, res) => {
+    res.redirect(routes.home);
+};  
+
 export const lineLogin = passport.authenticate('line');
 
 export const lineLoginCallback = async (_, __, params, ___, cb) => {

@@ -23,6 +23,10 @@ const DELETE_VIDEO = '/:id/delete';
 const GITHUB = '/auth/github';
 const GITHUB_CALLBACK = '/auth/github/callback';
 
+// Facebook
+const FACEBOOK = '/auth/facebook';
+const FACEBOOK_CALLBACK = '/auth/facebook/callback';
+
 // LINE
 const LINE = '/auth/line';
 const LINE_CALLBACK = '/auth/line/callback';
@@ -31,6 +35,7 @@ const LINE_CALLBACK = '/auth/line/callback';
 const API = '/api';
 const REGISTER_VIEW = '/:id/view';
 const ADD_COMMENT = '/:id/comment';
+const LOAD_COMMENT = '/:id/comment/load/:commentCount';
 
 const routes = {
     home: HOME,
@@ -76,9 +81,12 @@ const routes = {
     githubCallback: GITHUB_CALLBACK,
     line: LINE,
     lineCallback: LINE_CALLBACK,
+    facebook: FACEBOOK,
+    facebookCallback: FACEBOOK_CALLBACK,
     api: API,
     registerView: REGISTER_VIEW,
-    addComment: ADD_COMMENT
+    addComment: ADD_COMMENT,
+    loadComment: LOAD_COMMENT
 };
 
 export default routes;
