@@ -26,7 +26,10 @@ block content
       ul.video__comments-list#jsCommentList
         each comment in comments
           li
-            span=comment.text
+            div.video__comments-list__details
+              a(href=routes.userDetail(comment.creator.id))
+                span=comment.creator.name
+              span=comment.text
       a#jsLoadComment(data-value='10')
-        button コメントをもっと見る
+        button.noComment コメントがもうありません
       
