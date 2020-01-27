@@ -17,7 +17,7 @@ const multerVideo = multer({
     storage: multerS3({
         s3,
         acl: 'public-read',
-        bucket: 'awesome-tube/videos/'
+        bucket: 'awesome-tube/videos'
     })
 });
 
@@ -25,7 +25,7 @@ const multerAvatar = multer({
     storage: multerS3({
         s3,
         acl: 'public-read',
-        bucket: 'awesome-tube/avatars/'
+        bucket: 'awesome-tube/avatars'
     })
 });
 
