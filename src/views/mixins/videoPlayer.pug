@@ -1,3 +1,3 @@
 mixin videoPlayer(video = {})
   .videoPlayer#jsVideoPlayer 
-    video(src=`/${video.src}` /*AWS S3 사용시 src=video.src*/, controls=true)
+    video(src=video.src /*AWS S3 사용시 src=video.src, 로컬 사용시 /${video.src}*/, controls=true)

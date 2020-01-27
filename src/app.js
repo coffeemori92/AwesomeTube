@@ -28,7 +28,8 @@ app.set('view engine', 'pug');
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// S3 사용시 불필요 
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json()); // req.body
 app.use(express.urlencoded({extended: true})); // false: querystring모듈(내장 모듈)
                                                // true: qs모듈(npm 패키지)

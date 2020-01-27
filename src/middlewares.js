@@ -7,30 +7,30 @@ import multer from 'multer';
  * AWS 설정용
  * 
  */
-// const s3 = new aws.S3({
-//     accessKeyId: process.env.AWS_KEY,
-//     secretAccessKey: process.env.AWS_PRIVATE_KEY,
-//     region: 'ap-northeast-1' // 도쿄
-// });
+const s3 = new aws.S3({
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_PRIVATE_KEY,
+    region: 'ap-northeast-1' // 도쿄
+});
 
-// const multerVideo = multer({
-//     storage: multerS3({
-//         s3,
-//         acl: 'public-read',
-//         bucket: 'awesome-tube/videos/'
-//     })
-// });
+const multerVideo = multer({
+    storage: multerS3({
+        s3,
+        acl: 'public-read',
+        bucket: 'awesome-tube/videos/'
+    })
+});
 
-// const multerAvatar = multer({
-//     storage: multerS3({
-//         s3,
-//         acl: 'public-read',
-//         bucket: 'awesome-tube/avatars/'
-//     })
-// });
+const multerAvatar = multer({
+    storage: multerS3({
+        s3,
+        acl: 'public-read',
+        bucket: 'awesome-tube/avatars/'
+    })
+});
 
-const multerVideo  = multer({dest: 'src/uploads/videos/'});
-const multerAvatar = multer({dest: 'src/uploads/avatars/'});
+// const multerVideo  = multer({dest: 'src/uploads/videos/'});
+// const multerAvatar = multer({dest: 'src/uploads/avatars/'});
 
 // single 하나의 이미지를 업로드 할 때 사용 => req.file 객체 생성
 // array 여러개의 이미지를 업로드 할 때 사용, 속성 하나에 이미지를 여러개 업로드

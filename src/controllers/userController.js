@@ -184,8 +184,8 @@ export const postEditProfile = async (req, res) => {
     console.log(req.file);
     try{
         await User.findByIdAndUpdate(req.user.id, {
-            // AWS S3사용시 file.location
-            name, email, avatarUrl: file ? file.path : req.user.avatarUrl
+            // AWS S3사용시 file.location, 로컬 사용시 file.path
+            name, email, avatarUrl: file ? file.location : req.user.avatarUrl
         });
         res.redirect(routes.me);
     }catch(error){
